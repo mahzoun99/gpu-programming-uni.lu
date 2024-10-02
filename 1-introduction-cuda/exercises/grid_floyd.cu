@@ -5,7 +5,7 @@
 
 void floyd_warshall_cpu(std::vector<std::vector<int>>& d) {
   size_t n = d.size();
-  for(int k = 0; k < n; ++k) {
+  // for(int k = 0; k < n; ++k) {
     for(int i = 0; i < n; ++i) {
       for(int j = 0; j < n; ++j) {
         if(d[i][j] > d[i][k] + d[k][j]) {
@@ -13,7 +13,7 @@ void floyd_warshall_cpu(std::vector<std::vector<int>>& d) {
         }
       }
     }
-  }
+  // }
 }
 
 int main(int argc, char** argv) {
@@ -39,6 +39,10 @@ int main(int argc, char** argv) {
   // III. Running Floyd Warshall on the whole GPU grid.
 
   // TODO: call the kernel `n` times for each value of `k` (move the outer loop outside of the kernel).
+  for(int k = 0; k < ; ++k) {
+    floyd_warshall_cpu<<<num_blocks, num_blocks * block_size>>>gpu_distances();
+  }
+  cudaDeviceSynchronize();
 
   // IV. Verifying both give the same result and deallocating.
   check_equal_matrix(cpu_distances, gpu_distances);
